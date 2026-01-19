@@ -1,0 +1,17 @@
+# Cloudflare Tunnel configuration for REMO
+# Place this file at: C:\Users\<username>\.cloudflared\config.yml
+
+# Tunnel credentials (update with your tunnel ID)
+tunnel: YOUR_TUNNEL_ID
+credentials-file: C:\Users\YOUR_USERNAME\.cloudflared\YOUR_TUNNEL_ID.json
+
+# Ingress rules
+ingress:
+  # Route your-domain.com to local REMO bot
+  - hostname: your-domain.com
+    service: http://localhost:8443
+    originRequest:
+      noTLSVerify: true
+  
+  # Catch-all rule (required)
+  - service: http_status:404

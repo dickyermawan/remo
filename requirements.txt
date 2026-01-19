@@ -1,0 +1,27 @@
+# REMO Dependencies
+
+# Telegram Bot
+python-telegram-bot[webhooks]>=21.7
+
+# Web server for webhook
+aiohttp>=3.9.0
+
+# System control
+psutil>=5.9.0          # CPU, RAM, Battery, Process info
+pyautogui>=0.9.54      # Screenshot
+pycaw>=20230407        # Windows audio control
+screen-brightness-control>=0.22.0  # Brightness control
+pywin32>=306           # Windows API
+
+# Logging
+loguru>=0.7.2
+
+# Dashboard & Security
+aiohttp-session>=2.12.0
+aiohttp-jinja2>=1.6.0
+cryptography>=42.0.0
+itsdangerous>=2.1.2
+bcrypt>=4.1.0
+
+# Development
+python-dotenv>=1.0.0   # Environment variables

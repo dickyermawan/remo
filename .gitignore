@@ -1,0 +1,40 @@
+# Ignore
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Environment variables (contains secrets!)
+.env
+.env
+.venv
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Logs
+logs/
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Cloudflare credentials (keep secret!)
+*.json
+!package.json
+
+# Webhook secret (keep secret!)
+.webhook_secret
+
+# NSSM
+nssm.exe
