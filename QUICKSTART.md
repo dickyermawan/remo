@@ -1,106 +1,88 @@
-# 🚀 Quick Start Guide - REMO Bot
+# REMO - Simple Start/Stop Guide
 
-## ✅ Bot Sudah Berjalan!
+## 🚀 Quick Start
 
-Bot REMO sudah running dalam **POLLING MODE** (test mode tanpa perlu Cloudflare Tunnel).
-
+### Start Bot (Background)
+```batch
+start.bat
 ```
-✅ Bot started successfully!
-📡 Polling for updates...
+
+Bot runs in background, no window.
+
+### Stop Bot
+```batch
+stop.bat
 ```
+
+Stops all REMO processes.
 
 ---
 
-## 🧪 Test Sekarang!
+## ⚙️ Auto-Start on Boot (Optional)
 
-### 1. Buka Telegram
-Cari bot kamu di Telegram (using bot username from your `.env` file)
-
-### 2. Kirim Command
-Coba kirim salah satu command ini:
-
-```
-/start
-/status
-/screenshot
-/volume
-/lock
+### Enable Auto-Start
+```batch
+enable_autostart.bat
 ```
 
-### 3. Test Power Commands (dengan konfirmasi)
+**Run as Administrator**
+
+Bot will auto-start when you log in to Windows.
+
+### Disable Auto-Start
+```batch
+disable_autostart.bat
 ```
-/shutdown
-/restart  
-/sleep
-```
-Bot akan minta konfirmasi dengan tombol Yes/No
+
+**Run as Administrator**
 
 ---
 
-## 📝 Semua Command
+## 📋 Available Scripts
 
-| Command | Fungsi |
-|---------|--------|
-| `/start` | Welcome message |
-| `/help` | Daftar semua command |
-| **🔐 Power** ||
-| `/lock` | Lock screen |
-| `/sleep` | Sleep mode (konfirmasi) |
-| `/shutdown` | Shutdown PC (konfirmasi) |
-| `/restart` | Restart PC (konfirmasi) |
-| **📊 Status** ||
-| `/status` | CPU, RAM, Battery, Disk, Uptime |
-| **📸 Display** ||
-| `/screenshot` | Capture screen → kirim ke Telegram |
-| `/brightness` | Lihat brightness |
-| `/brightness 50` | Set brightness 50% |
-| **🔊 Audio** ||
-| `/volume` | Lihat volume |
-| `/volume 75` | Set volume 75% |
-| `/mute` | Mute audio |
-| `/unmute` | Unmute audio |
+| Script | Function |
+|--------|----------|
+| `start.bat` | Start bot in background |
+| `stop.bat` | Stop bot |
+| `enable_autostart.bat` | Enable auto-start on boot |
+| `disable_autostart.bat` | Disable auto-start |
 
 ---
 
-## 🔄 Mode: Polling vs Webhook
+## 🔍 Check if Running
 
-### Saat Ini: **Polling Mode** ✅
-- **File:** `main_polling.py`
-- **Cara Run:** `python main_polling.py`
-- **Keuntungan:** Simple, langsung jalan, tidak perlu setup domain
-- **Kekurangan:** Bot harus selalu running di laptop
+Open Task Manager → Look for `pythonw.exe` process
 
-### Production: **Webhook Mode**
-- **File:** `main.py`
-- **Requirement:** Cloudflare Tunnel + Domain setup
-- **Keuntungan:** Lebih efisien, real-time
-- **Setup:** Lihat `README.md`
-
----
-
-## ⏹️ Stop Bot
-
-Tekan `Ctrl+C` untuk stop bot.
-
----
-
-## 🔒 Security
-
-✅ Bot hanya menerima command dari User ID yang di-set di `.env` file
-
-✅ User lain yang coba kirim command akan ditolak dengan:
+Or check:
 ```
-⛔ Access denied. You are not authorized to use this bot.
+http://localhost:8443/
 ```
 
+If dashboard loads → Bot is running! ✅
+
 ---
 
-## 📦 Next Steps
+## 📝 Logs
 
-### Untuk Production (nanti):
-1. Setup Cloudflare Tunnel
-2. Pointing domain (dari `.env` file)
-3. Run `main.py` (webhook mode)
-4. Install sebagai Windows Service (auto-start)
+Check `logs\remo.log` for activity and errors.
 
-**Untuk sekarang:** Test dulu dengan `main_polling.py` sampai yakin semua command works! 🎉
+---
+
+## ⚠️ Troubleshooting
+
+**Bot tidak start?**
+- Check `.env` file exists and configured
+- Check `logs\remo.log` for errors
+- Run `python main.py` directly to see errors
+
+**Port 8443 already in use?**
+- Stop other instances: `stop.bat`
+- Or kill manually: `taskkill /F /IM pythonw.exe`
+
+**Auto-start not working?**
+- Run `enable_autostart.bat` as Administrator
+- Check Task Scheduler: "REMO Bot Auto-Start" task exists
+
+---
+
+Super simple! No NSSM, no Windows Service complexity! 🎉

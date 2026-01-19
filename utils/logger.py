@@ -16,18 +16,24 @@ def setup_logger():
     # Remove default handler
     logger.remove()
     
-    # Console handler with colors
-    logger.add(
-        sys.stdout,
-        level=config.LOG_LEVEL,
-        format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
-               "<level>{level: <8}</level> | "
-               "<cyan>{name}</cyan>:<cyan>{function}</cyan> | "
-               "<level>{message}</level>",
-        colorize=True,
-    )
+    # Console handler with colors (only if stdout is available)
+    # Skip console logging when running with pythonw.exe (no console)
+    if sys.stdout and hasattr(sys.stdout, 'write'):
+        try:
+            logger.add(
+                sys.stdout,
+                level=config.LOG_LEVEL,
+                format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "
+                       "<level>{level: <8}</level> | "
+                       "<cyan>{name}</cyan>:<cyan>{function}</cyan> | "
+                       "<level>{message}</level>",
+                colorize=True,
+            )
+        except Exception:
+            # Silently fail if console not available (pythonw mode)
+            pass
     
-    # File handler with rotation
+    # File handler with rotation (always enabled)
     logger.add(
         config.LOG_FILE,
         level="DEBUG",
